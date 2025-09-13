@@ -9,3 +9,5 @@ Dbrouter.get("/createTable", (req, res) => {
     console.log("Erro in creating Table ", error);
   }
 });
+
+export default Dbrouter;

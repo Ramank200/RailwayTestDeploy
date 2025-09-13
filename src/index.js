@@ -1,4 +1,5 @@
 const express = require("express");
+const { default: Dbrouter } = require("./Routes/DatabaseRouter");
 require("dotenv").config();
 const app = express();
 const PORT = process.env.PORT || 8080;
@@ -34,6 +35,8 @@ app.get("/", (req, res) => {
   );
   res.send("Hello World!");
 });
+
+app.use("/db", Dbrouter);
 
 app.listen(PORT, () => {
   console.log(`Example app listening on port ${PORT}!`);
