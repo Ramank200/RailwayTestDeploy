@@ -1,4 +1,4 @@
-import db from "./db";
+const db = require("./db");
 const query = `-- ========================
 -- Table: adishilp_address
 -- ========================
@@ -139,5 +139,4 @@ const CreateTables = () => {
     }
   });
 };
-
-export default CreateTables;
+module.exports = CreateTables;

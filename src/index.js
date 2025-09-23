@@ -1,20 +1,13 @@
 const express = require("express");
-const { default: Dbrouter } = require("./Routes/DatabaseRouter");
+const Dbrouter = require("./Routes/DatabaseRouter");
 require("dotenv").config();
 const app = express();
 const PORT = process.env.PORT || 8080;
-// const db = require("../Db/db");
+const db = require("../Database/db");
+const userRouter = require("./Routes/UserRouter");
+const ProductRouter = require("./Routes/ProductRouter");
 
-// db.query(
-//   "Insert into users (name,age,email) values ('John', 30, 'lMmJ7@example.com')",
-//   (err, res) => {
-//     if (err) {
-//       console.log(err.stack);
-//     } else {
-//       console.log(res.rows);
-//     }
-//   }
-// );
+app.use(express.json());
 
 app.get("/", (req, res) => {
   let Itime = Date.now();
@@ -37,6 +30,8 @@ app.get("/", (req, res) => {
 });
 
 app.use("/db", Dbrouter);
+app.use("/user", userRouter);
+app.use("/product", ProductRouter);
 
 app.listen(PORT, () => {
   console.log(`Example app listening on port ${PORT}!`);

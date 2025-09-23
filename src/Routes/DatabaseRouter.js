@@ -1,13 +1,9 @@
 const express = require("express");
-const { default: CreateTables } = require("../../Database/CreateTables");
+const {
+  createTablesInPgSql,
+} = require("../Controllers/DatabaseDDLControllers/DatabasddlContoller");
 const Dbrouter = express.Router();
 
-Dbrouter.get("/createTable", (req, res) => {
-  try {
-    CreateTables();
-  } catch (error) {
-    console.log("Erro in creating Table ", error);
-  }
-});
+Dbrouter.get("/createTable", createTablesInPgSql);
 
-export default Dbrouter;
+module.exports = Dbrouter;
