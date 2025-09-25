@@ -209,6 +209,11 @@ const AddProductToTheCart = async (req, res) => {
   }
 };
 
+const RemoveFromTheCart = async (req, res) => {
+  const { user_id } = req.query;
+  const { product_id } = req.body;
+};
+
 module.exports = {
   CreateProduct,
   AddImageToProduct,

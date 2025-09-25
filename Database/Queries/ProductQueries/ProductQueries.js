@@ -49,6 +49,20 @@ const AddProductToCartQuery = () => {
   return query;
 };
 
+const RemoveProductfromTheCartQuery = () => {
+  const query = `Update adishilp_cart_product set status_of_product='removed_from_cart' where user_id=$1 and product_id=$2;' `;
+  return query;
+};
+
+const CheckoutTheCartQuery = () => {
+  const query = `Update adishilp_cart_product set status_of_product='checked_out' where user_id=$1 and status_of_product='added_to_cart' `;
+};
+
+const PrepareCartForDeliceryQuery = () => {
+  const query = `Insert into adishilp_order (user_id,session_id,date_ordered,amount_to_be_paid,order_status,payment_status) values ($1,$2,$3,$4,$5,$6) `;
+  return query;
+};
+
 module.exports = {
   InsertDataQuery,
   AddImagesToProductQuery,
@@ -59,4 +73,7 @@ module.exports = {
   AddProductToWishListQuery,
   RemoveProductFromWishlistQuery,
   AddProductToCartQuery,
+  RemoveProductfromTheCartQuery,
+  CheckoutTheCartQuery,
+  PrepareCartForDeliceryQuery,
 };
