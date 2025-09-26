@@ -5,8 +5,6 @@ const {
   AddInventoryOfTheProductQuery,
   GetProductByIdQuery,
   GetProducts,
-  AddProductToWishListQuery,
-  RemoveProductFromWishlistQuery,
 } = require("../../../Database/Queries/ProductQueries/ProductQueries");
 
 const CreateProduct = (req, res) => {
@@ -140,78 +138,19 @@ const GetProductFromId = async (req, res) => {
   }
 };
 
-// const GetProduct = async (req, res) => {
-//   let { imageLimit = 4, page = 1, size = 12 } = req.query;
+const GetProduct = async (req, res) => {
+  let { imageLimit = 4, page = 1, size = 12 } = req.query;
 
-//   const offset = page * size;
+  const offset = page * size;
 
-//   try {
-//     let productFetchedFromDb = [];
-//     const GetProducts = GetProducts();
-//     productFetchedFromDb = await db.query();
-//   } catch (error) {
-//     console.log(error);
-//     return res.status(500).send("Internal Server Error");
-//   }
-// };
-
-const AddProductToWishList = async (req, res) => {
-  const { user_id } = req.query;
-  const { product_details } = req.body;
-
-  const { product_id, quantity_of_product } = product_details;
-
-  const QueryToAddProductToWishList = AddProductToWishListQuery();
   try {
-    const AddingProductToWishlist = await db.query(
-      QueryToAddProductToWishList,
-      [user_id, product_id, quantity_of_product, true]
-    );
-    return res.status(200).send("Added Product To Wishlist");
+    let productFetchedFromDb = [];
+    const QueryToGetProducts = GetProducts();
+    productFetchedFromDb = await db.query(QueryToGetProducts, []);
   } catch (error) {
     console.log(error);
-    res.status(500).send("Internal Server Error");
+    return res.status(500).send("Internal Server Error");
   }
-};
-
-const RemoveProductFromWishList = async (req, res) => {
-  const { user_id } = req.query;
-  const { product_id } = req.body;
-  const QueryToRemoveProductFromWishList = RemoveProductFromWishlistQuery();
-  try {
-    const RemovingProductFromWishlist = await db.query(
-      QueryToRemoveProductFromWishList,
-      [user_id, product_id]
-    );
-    return res.status(200).send("Removed Product From Wishlist");
-  } catch (error) {
-    console.log(error);
-    res.status(500).send("Internal Server Error");
-  }
-};
-
-const AddProductToTheCart = async (req, res) => {
-  const { user_id } = req.query;
-  const { product_details } = req.body;
-  const { product_id, quantity_of_product } = product_details;
-  const QueryToAddProductToCart = AddProductToCartQuery();
-  try {
-    const AddingProductToCart = await db.query(QueryToAddProductToCart, [
-      user_id,
-      product_id,
-      quantity_of_product,
-      "added_to_cart",
-    ]);
-    return res.status(200).send("Added Product To Cart");
-  } catch (error) {
-    console.log(error);
-    res.status(500).send("Internal Server Error");
-  }
-};
-
-const RemoveFromTheCart = async (req, res) => {
-  const { user_id } = req.query;
-  const { product_id } = req.body;
 };
 
 module.exports = {
@@ -219,6 +158,4 @@ module.exports = {
   AddImageToProduct,
   AddInventoryOfTheProduct,
   GetProductFromId,
-  AddProductToWishList,
-  RemoveProductFromWishList,
 };
