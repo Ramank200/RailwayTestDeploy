@@ -13,16 +13,26 @@ const client = new pg.Client({
     "postgresql://postgres:EMXnOOXOvgtjhmyoMyzDkllDEqDVnKcr@yamanote.proxy.rlwy.net:41594/railway",
 });
 
+let dbInterval = null;
+
 const db = () => {
   client.connect((err) => {
     if (err) {
       console.warn("Can't Connect to DB due to ", err.message);
+      TryDbConnectionAgain();
     } else {
+      clearInterval(dbInterval);
       console.log("Connected to DB");
     }
   });
 
   return client;
+};
+
+const TryDbConnectionAgain = () => {
+  dbInterval = setInterval(() => {
+    db();
+  }, 3000);
 };
 
 module.exports = db();
