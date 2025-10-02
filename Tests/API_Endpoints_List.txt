@@ -1,0 +1,62 @@
+ADISHILP RAILWAY BACKEND - API ENDPOINTS LIST
+================================================
+
+Base URL: http://localhost:8080 (or your deployed URL)
+All routes are prefixed with their respective modules
+
+================================================
+1. ROOT ENDPOINT
+================================================
+GET  /                           - Health check endpoint that returns "Hello World!"
+
+================================================
+2. DATABASE ROUTES (/db)
+================================================
+GET  /db/createTable             - Creates database tables
+
+================================================
+3. USER ROUTES (/user)
+================================================
+POST /user/createUser            - Creates a new user
+
+================================================
+4. PRODUCT ROUTES (/product)
+================================================
+POST /product/createProduct              - Creates a new product
+POST /product/addImageToProduct          - Adds images to a product
+POST /product/addInventoryOfProduct      - Adds inventory for a product
+GET  /product/getProductById             - Retrieves a product by ID
+
+================================================
+5. PLANNED/COMMENTED ENDPOINTS (Not yet implemented)
+================================================
+PUT  /product/addProductToCart           - Add product to cart
+PUT  /product/removeProductFromCart      - Remove product from cart
+PUT  /product/removItemFromWishList      - Remove item from wishlist
+
+================================================
+SUMMARY
+================================================
+Total Active Endpoints: 6
+- 1 Root endpoint
+- 1 Database endpoint  
+- 1 User endpoint
+- 3 Product endpoints
+
+Planned Endpoints: 3 (commented out)
+
+================================================
+API STRUCTURE NOTES
+================================================
+- The API follows a RESTful structure
+- Clear separation of concerns across different modules
+- Each module has its own router and controller
+- Better organization and maintainability
+- Uses Express.js framework
+- Database: PostgreSQL
+- Port: 8080 (configurable via environment variable)
+
+================================================
+Generated on: $(date)
+Project: Adishilp Railway Backend
+================================================
