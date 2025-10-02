@@ -21,7 +21,6 @@ const db = () => {
       console.warn("Can't Connect to DB due to ", err.message);
       TryDbConnectionAgain();
     } else {
-      clearInterval(dbInterval);
       console.log("Connected to DB");
     }
   });
@@ -31,7 +30,14 @@ const db = () => {
 
 const TryDbConnectionAgain = () => {
   dbInterval = setInterval(() => {
-    db();
+    client.connect((err) => {
+      if (err) {
+        console.warn("Can't Connect to DB due to ", err.message);
+      } else {
+        clearInterval(dbInterval);
+        console.log("Connected to DB");
+      }
+    });
   }, 3000);
 };
 
